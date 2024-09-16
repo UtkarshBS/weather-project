@@ -1,0 +1,142 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "Weather Data API",
+      "version": "1.0.0",
+      "title": "Weather Data API"
+    },
+    "host": "localhost:5000",
+    "basePath": "/api",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/weather": {
+        "get": {
+          "summary": "Get weather data",
+          "parameters": [
+            {
+              "name": "station_id",
+              "in": "query",
+              "type": "string",
+              "description": "Filter by station ID"
+            },
+            {
+              "name": "date",
+              "in": "query",
+              "type": "string",
+              "description": "Filter by date (YYYY-MM-DD)"
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "type": "integer",
+              "description": "Limit the number of results"
+            },
+            {
+              "name": "offset",
+              "in": "query",
+              "type": "integer",
+              "description": "Offset the results for pagination"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Weather"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/weather/stats": {
+        "get": {
+          "summary": "Get weather statistics",
+          "parameters": [
+            {
+              "name": "station_id",
+              "in": "query",
+              "type": "string",
+              "description": "Filter by station ID"
+            },
+            {
+              "name": "year",
+              "in": "query",
+              "type": "integer",
+              "description": "Filter by year"
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "type": "integer",
+              "description": "Limit the number of results"
+            },
+            {
+              "name": "offset",
+              "in": "query",
+              "type": "integer",
+              "description": "Offset the results for pagination"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/WeatherStats"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Weather": {
+        "type": "object",
+        "properties": {
+          "station_id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "max_temp": {
+            "type": "number"
+          },
+          "min_temp": {
+            "type": "number"
+          },
+          "precipitation": {
+            "type": "number"
+          }
+        }
+      },
+      "WeatherStats": {
+        "type": "object",
+        "properties": {
+          "station_id": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer"
+          },
+          "avg_max_temp": {
+            "type": "number"
+          },
+          "avg_min_temp": {
+            "type": "number"
+          },
+          "total_precipitation": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+  

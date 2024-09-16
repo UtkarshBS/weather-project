@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: CronJob
+metadata:
+  name: weather-data-ingestion
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: weather-ingestion
+            image: <aws-ecr-url>/flask-api:latest  # using the same image as the flask one
+            command: ["python", "scripts/weather_ingestion.py"]
+          restartPolicy: OnFailure
